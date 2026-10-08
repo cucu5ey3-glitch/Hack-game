@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0A0A0A">
+
+    <!-- Tabs -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#111111"
+        app:tabIndicatorColor="#00FF88"
+        app:tabSelectedTextColor="#00FF88"
+        app:tabTextColor="#888888"
+        app:tabMode="fixed"
+        app:tabGravity="fill"/>
+
+    <!-- ========== TAB 1: Memory Hack ========== -->
+    <LinearLayout
+        android:id="@+id/panelMemory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Memory Editor"
+            android:textColor="#00FF88"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/selectedProcess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="لم يتم اختيار عملية"
+            android:textColor="#FFAA00"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"/>
+
+        <ListView
+            android:id="@+id/processList"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#1A1A1A"
+            android:divider="#333"
+            android:dividerHeight="1dp"/>
+
+        <Button
+            android:id="@+id/btnRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="تحديث العمليات"
+            android:textSize="12sp"
+            android:backgroundTint="#222222"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Search Type -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="نوع البحث:"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+
+        <Spinner
+            android:id="@+id/searchTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#1A1A1A"
+            android:popupBackground="#222222"/>
+
+        <EditText
+            android:id="@+id/searchValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="القيمة (Exact) أو اتركها فارغة (Fuzzy)"
+            android:inputType="numberSigned"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#555555"
+            android:background="#1A1A1A"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="بحث"
+                android:textSize="12sp"
+                android:backgroundTint="#007744"
+                android:layout_marginEnd="3dp"/>
+
+            <Button
+                android:id="@+id/btnEditValue"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="تعديل قيمة"
+                android:textSize="12sp"
+                android:backgroundTint="#0055AA"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"/>
+
+            <Button
+                android:id="@+id/btnFreeze"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="تجميد"
+                android:textSize="12sp"
+                android:backgroundTint="#AA5500"
+                android:layout_marginStart="3dp"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/newValueEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="القيمة الجديدة للتعديل"
+            android:inputType="numberSigned"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#555555"
+            android:background="#1A1A1A"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"/>
+
+        <Button
+            android:id="@+id/btnAutoZero"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:text="⚡ اكتشاف السعر تلقائي → صفر"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:backgroundTint="#CC0000"
+            android:layout_marginTop="8dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/resultsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#00FF88"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:text="النتائج هتظهر هنا..."/>
+        </ScrollView>
+    </LinearLayout>
+
+
+    <!-- ========== TAB 2: App Modding ========== -->
+    <LinearLayout
+        android:id="@+id/panelApps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تعديل التطبيقات"
+            android:textColor="#FF5555"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/selectedApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="لم يتم اختيار تطبيق"
+            android:textColor="#FFAA00"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"/>
+
+        <ListView
+            android:id="@+id/appList"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#1A1A1A"
+            android:divider="#333"
+            android:dividerHeight="1dp"/>
+
+        <Button
+            android:id="@+id/btnRefreshApps"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="تحديث قائمة التطبيقات"
+            android:textSize="12sp"
+            android:backgroundTint="#222222"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Dangerous Actions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="إجراءات خطيرة (Root):"
+            android:textColor="#FF4444"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <Button
+                android:id="@+id/btnForceStop"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Force Stop"
+                android:textSize="11sp"
+                android:backgroundTint="#AA0000"
+                android:layout_marginEnd="2dp"/>
+
+            <Button
+                android:id="@+id/btnClearData"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Clear Data"
+                android:textSize="11sp"
+                android:backgroundTint="#AA0000"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"/>
+
+            <Button
+                android:id="@+id/btnDisable"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Disable"
+                android:textSize="11sp"
+                android:backgroundTint="#AA0000"
+                android:layout_marginStart="2dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <Button
+                android:id="@+id/btnEnable"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Enable"
+                android:textSize="11sp"
+                android:backgroundTint="#007744"
+                android:layout_marginEnd="2dp"/>
+
+            <Button
+                android:id="@+id/btnKill"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Kill Process"
+                android:textSize="11sp"
+                android:backgroundTint="#AA0000"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"/>
+
+            <Button
+                android:id="@+id/btnUnlock"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Unlock Premium"
+                android:textSize="11sp"
+                android:backgroundTint="#5500AA"
+                android:layout_marginStart="2dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRemoveAds"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="إزالة الإعلانات (Patch Attempt)"
+            android:textSize="12sp"
+            android:backgroundTint="#5500AA"
+            android:layout_marginTop="4dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/appLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF8888"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:text="سجل العمليات هيظهر هنا..."/>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
